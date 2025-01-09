@@ -805,3 +805,7 @@ C:\Users\gaspe\FRI\IS_net\Blagajna\Blagajna\web\obj\Debug\net8.0\refint\web.dll
 C:\Users\gaspe\FRI\IS_net\Blagajna\Blagajna\web\obj\Debug\net8.0\web.pdb
 C:\Users\gaspe\FRI\IS_net\Blagajna\Blagajna\web\obj\Debug\net8.0\web.genruntimeconfig.cache
 C:\Users\gaspe\FRI\IS_net\Blagajna\Blagajna\web\obj\Debug\net8.0\ref\web.dll
+C:\Users\gaspe\FRI\IS_net\Blagajna\Blagajna\web\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\gaspe\FRI\IS_net\Blagajna\Blagajna\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\gaspe\FRI\IS_net\Blagajna\Blagajna\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\gaspe\FRI\IS_net\Blagajna\Blagajna\web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
