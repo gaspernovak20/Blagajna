@@ -8043,24 +8043,27 @@
     ]
   },
   "packageFolders": {
-    "/Users/davidreseta/.nuget/packages/": {}
+    "C:\\Users\\gaspe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/davidreseta/Blagajna/web/web.csproj",
+      "projectUniqueName": "C:\\Users\\gaspe\\FRI\\IS_net\\Blagajna\\Blagajna\\web\\web.csproj",
       "projectName": "web",
-      "projectPath": "/Users/davidreseta/Blagajna/web/web.csproj",
-      "packagesPath": "/Users/davidreseta/.nuget/packages/",
-      "outputPath": "/Users/davidreseta/Blagajna/web/obj/",
+      "projectPath": "C:\\Users\\gaspe\\FRI\\IS_net\\Blagajna\\Blagajna\\web\\web.csproj",
+      "packagesPath": "C:\\Users\\gaspe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\gaspe\\FRI\\IS_net\\Blagajna\\Blagajna\\web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/davidreseta/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\gaspe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8136,7 +8139,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
