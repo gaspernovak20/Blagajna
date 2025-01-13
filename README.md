@@ -4,3 +4,4 @@ Upravljanje osebnih financ je pogosto zahtevno in časovno potratno, zlasti če 
 
 Docker Image: 
 docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=yourStrong(!)Password" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2022-CU15-GDR1-ubuntu-22.04
+![BlagajnaAppTransactions](https://github.com/user-attachments/assets/95c3aa5a-9939-41ba-9842-294deaf85ff1)
