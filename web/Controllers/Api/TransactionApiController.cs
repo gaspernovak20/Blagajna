@@ -6,12 +6,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using web.Data;
+using web.Filters;
 using web.Models;
 
 namespace web.Controllers_Api
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [ApiKeyAuth]
+
     public class TransactionApiController : ControllerBase
     {
         private readonly BlagajnaContext _context;
@@ -30,6 +33,7 @@ namespace web.Controllers_Api
 
         // GET: api/TransactionApi/5
         [HttpGet("{id}")]
+
         public async Task<ActionResult<Transaction>> GetTransaction(int id)
         {
             var transaction = await _context.Transactions.FindAsync(id);
@@ -86,6 +90,7 @@ namespace web.Controllers_Api
 
         // DELETE: api/TransactionApi/5
         [HttpDelete("{id}")]
+        [ApiKeyAuth]
         public async Task<IActionResult> DeleteTransaction(int id)
         {
             var transaction = await _context.Transactions.FindAsync(id);
