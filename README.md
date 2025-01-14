@@ -11,11 +11,8 @@
 ![image](https://github.com/user-attachments/assets/1ae8d71f-7bb7-4227-b36a-2de1882595c2)
 ![image](https://github.com/user-attachments/assets/febaa463-4f5a-4b8b-a97b-f3a8d631d3bd)
 
-
-
-
 ### Mobilna aplikacija
-  images
+![BlagajnaAppTransactions](https://github.com/user-attachments/assets/95c3aa5a-9939-41ba-9842-294deaf85ff1)
 
 Upravljanje osebnih financ je pogosto zahtevno in časovno potratno, zlasti če gre za posameznike, ki morajo nadzorovati veliko različnih kategorij porabe, kot so računi, krediti, prihranki in vsakodnevni stroški. Situacija je še bolj kompleksna v primerih, kjer več članov gospodinjstva ali skupine sodeluje pri skupnih stroških in financiranju, kot na primer pri sobivanju, skupinskih projektih ali družinskih proračunih. Pogosto prihaja do težav pri delitvi stroškov, nejasnosti o porabi sredstev ali celo nesporazumov glede odgovornosti za posamezne stroške. Sistem za upravljanje z osebnimi financami in proračunom s podporo za skupinsko upravljanje uporabnikom omogoča enostavno spremljanje, beleženje in analiziranje osebnih ter skupnih financ. 
 
@@ -40,6 +37,6 @@ docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=yourStrong(!)Password" -p 1433:143
   N2
   N3
 
-![BlagajnaAppTransactions](https://github.com/user-attachments/assets/95c3aa5a-9939-41ba-9842-294deaf85ff1)
+
 ## Slika podatkovnega modela podatkovne baze
 ![Blagajna-db schime](https://github.com/user-attachments/assets/f8715477-0e6f-4bcf-bfca-ddfcd44cb87f)
