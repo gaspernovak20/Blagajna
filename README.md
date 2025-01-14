@@ -3,7 +3,17 @@
 
 ## Zaslonske slike grafičnega vmesnika 
 ### Spletna stran
-  images
+![image](https://github.com/user-attachments/assets/13fc6f31-7bd7-44d5-b580-db5e5ff6ba54)
+![image](https://github.com/user-attachments/assets/1e02fab4-a2aa-4f26-940d-8f8e3ea8c9f9)
+![image](https://github.com/user-attachments/assets/2e418072-db59-436f-b362-5b7f20755dc9)
+![image](https://github.com/user-attachments/assets/03cc10ce-1aa1-4709-ab78-b5d6d5a00d79)
+![image](https://github.com/user-attachments/assets/b3e399ba-ae14-49d5-8f75-eaa3e22cda3f)
+![image](https://github.com/user-attachments/assets/1ae8d71f-7bb7-4227-b36a-2de1882595c2)
+![image](https://github.com/user-attachments/assets/febaa463-4f5a-4b8b-a97b-f3a8d631d3bd)
+
+
+
+
 ### Mobilna aplikacija
   images
 
