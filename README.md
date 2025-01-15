@@ -29,14 +29,14 @@ docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=yourStrong(!)Password" -p 1433:143
 
 ## Opravljene naloge
 ### David Rešeta
-  N1
-  N2
-  N3
+  -Admin view
+  -Android Aplikacija
+  -Home screen izpis
+  -razširitev podatkovnega modela
 ### Gašper Novak
-  N1
-  N2
-  N3
-
-
+  -Avtentikaciji in avtorizacija
+  -api-ji
+  -postavitev PB
+  -dokumentacija
 ## Slika podatkovnega modela podatkovne baze
 ![Blagajna-db schime](https://github.com/user-attachments/assets/f8715477-0e6f-4bcf-bfca-ddfcd44cb87f)
