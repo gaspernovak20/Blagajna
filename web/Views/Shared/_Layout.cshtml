@@ -12,48 +12,52 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <!-- top navbar for small screens -->
+        <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom box-shadow mb-3 d-md-none">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blagajna</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav"
+                    aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Transaction"
-                                asp-action="Index">Transactions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category"
-                                asp-action="Index">Category</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Budget"
-                                asp-action="Index">Budget</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Incomes" 
-                            asp-action="Index">Income</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Saved" 
-                            asp-action="Index">Save money</a>
-                        </li>
+                <div class="collapse navbar-collapse" id="mobileNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Transaction" asp-action="Index">Transactions</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Category" asp-action="Index">Categories</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Budget" asp-action="Index">Budgets</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Incomes" asp-action="Index">Incomes</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Saved" asp-action="Index">Savings</a></li>
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
+
+        <!-- sidebar for md+ screens -->
+        <aside class="sidebar d-none d-md-flex flex-column">
+            <div class="sidebar-brand mb-3">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blagajna</a>
+            </div>
+            <nav class="nav nav-pills flex-column" aria-label="Main navigation">
+                <a class="nav-link" asp-controller="Home" asp-action="Index"><span class="nav-icon">🏠</span> Home</a>
+                <a class="nav-link" asp-controller="Transaction" asp-action="Index"><span class="nav-icon">📄</span> Transactions</a>
+                <a class="nav-link" asp-controller="Category" asp-action="Index"><span class="nav-icon">🏷️</span> Categories</a>
+                <a class="nav-link" asp-controller="Budget" asp-action="Index"><span class="nav-icon">💼</span> Budgets</a>
+                <a class="nav-link" asp-controller="Incomes" asp-action="Index"><span class="nav-icon">➕</span> Incomes</a>
+                <a class="nav-link" asp-controller="Saved" asp-action="Index"><span class="nav-icon">🐷</span> Savings</a>
+                <hr />
+                <a class="nav-link mt-auto btn btn-sm btn-outline-secondary" asp-controller="AdminTables" asp-action="Index">Admin dashboard</a>
+            </nav>
+        </aside>
     </header>
+
+    <div class="content-wrapper">
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+    </div>
     </div>
 
     <footer class="border-top footer text-muted">
