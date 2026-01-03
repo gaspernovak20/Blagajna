@@ -6,16 +6,17 @@
 
 <h1>SAVE MONEY</h1>
 <br>
-<p>
-    <a asp-action="Create">ADD MONEY TO YOUR SAVINGS ACCOUNT</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card p-3 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h4 m-0">Saves</h1>
+        <a class="btn btn-sm btn-primary" asp-action="Create">Add</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table mb-0">
                 @Html.DisplayNameFor(model => model.Date)
             </th>
             <th></th>
@@ -31,11 +32,13 @@
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-sm btn-outline-primary me-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-sm btn-outline-secondary me-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
     </tbody>
-</table>
+        </table>
+    </div>
+</div>

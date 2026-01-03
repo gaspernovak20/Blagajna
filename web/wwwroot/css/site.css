@@ -1,46 +1,93 @@
-html {
-  font-size: 14px;
+:root{
+  --bg: #F7FAFC; /* page background */
+  --surface: #FFFFFF; /* cards */
+  --muted: #6B7280;
+  --primary: #2D6CDF; /* accent */
+  --accent: #00BFA6;
+  --radius: 12px;
+  --page-pad: 1rem;
+  --max-width: 1100px;
+  --shadow-1: 0 6px 18px rgba(23, 23, 23, 0.06);
+  --shadow-2: 0 2px 6px rgba(23, 23, 23, 0.04);
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* Typography and base sizing */
+html { font-size: 15px; }
+@media (min-width: 768px) { html { font-size: 16px; } }
 body {
-  margin-bottom: 60px;
-  background-color: #ffb300;
+  margin: 0 0 60px 0;
+  background-color: var(--bg);
+  color: #111827;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
+/* Navbar */
+.navbar {
+  background: linear-gradient(90deg, rgba(255,255,255,0.85), rgba(255,255,255,0.95));
+  border: none;
+  padding: 0.5rem 1rem;
+  box-shadow: var(--shadow-2);
+}
+.navbar-brand{ font-weight:700; color:var(--primary) !important; }
+.navbar .nav-link{ color:var(--muted) !important; padding:0.5rem 0.8rem; }
+.navbar .nav-link:hover{ color:var(--primary) !important; }
+
+/* Page container */
+.container{ max-width: var(--max-width); }
+
+/* Card-like main boxes */
 .main-container {
-  display: flex;
-  flex-wrap: wrap; /* Elementi se prilagodijo v dve vrstici */
-  justify-content: center; /* Poravnava na sredino vodoravno */
-  align-items: center; /* Poravnava na sredino navpično */
-  gap: 20px; /* Razmik med elementi */
-  margin-top: 10px; /* Prostor nad kontejnerjem */
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  justify-content:center;
+  margin-top: 14px;
+}
+.main-box{
+  padding: 18px;
+  display:flex;
+  flex-direction:column;
+  width: 320px;
+  background: var(--surface);
+  text-align: left;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  margin: 6px;
+  box-shadow: var(--shadow-1);
+  transition: transform .15s ease, box-shadow .15s ease;
 }
 
-/* Prilagodimo obstoječi slog */
-.main-box {
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  width: 350px; /* Fiksna širina za boljšo poravnavo */
-  background-color: aliceblue;
-  text-align: center;
-  border-radius: 30px;
-  font-size: 25px;
-  margin: 10px; /* Manjši razmik, saj gap ureja razmik med elementi */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Dodaten vizualni učinek */
+/* Home page hero and stat styles */
+.hero{ padding: 2rem 1rem; border-radius: calc(var(--radius) + 4px); background: linear-gradient(180deg, rgba(45,108,223,0.03), transparent); margin-bottom: 1rem; }
+.hero h1{ font-size: 2rem; letter-spacing: 1px; margin-bottom: 0.25rem; }
+.hero-sub{ color:var(--accent); font-weight:600; margin:0; }
+.cont-text{ text-transform:uppercase; font-weight:600; color:var(--muted); margin:0; font-size:0.8rem; }
+.cont-ammount{ font-weight:800; font-size:1.6rem; margin:6px 0 0 0; }
+.main-box:hover{ transform: translateY(-4px); box-shadow: 0 10px 28px rgba(23,23,23,0.08); }
+
+/* Buttons and inputs */
+.btn-primary{
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
+.btn-primary:hover{ background-color:#235bb0; border-color:#235bb0 }
+.btn-outline-primary{ color:var(--primary); border-color:var(--primary); }
+.form-control{ border-radius:8px; box-shadow:none; border:1px solid #E6E9EE; }
+.form-control:focus{ box-shadow: 0 0 0 0.15rem rgba(45,108,223,0.12); border-color: var(--primary); }
+
+/* Tables */
+.table thead th{ background: #fbfdff; color:var(--muted); border-bottom:1px solid #EEF2F6; }
+.table tbody tr:hover{ background:#FBFDFF; }
+
+/* Footer */
+.footer{ background: transparent; padding: 1rem 0; color:var(--muted); }
+
+/* Small utilities */
+.muted{ color:var(--muted); }
+
+/* Make sure focus outlines are visible and accessible */
+a:focus, button:focus, input:focus { outline: 3px solid rgba(45,108,223,0.12); outline-offset: 2px; }
+
+/* keep legacy class styles compatible */
+.box-shadow{ box-shadow: var(--shadow-2); }
+
