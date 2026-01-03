@@ -104,10 +104,12 @@ a:focus, button:focus, input:focus { outline: 3px solid rgba(45,108,223,0.12); o
   bottom: 0;
   z-index: 1030;
 }
+.sidebar{ overflow-y: auto; }
 .sidebar-brand .navbar-brand{ color:var(--primary); font-weight:800; }
 .content-wrapper{ margin-left:0; transition: margin-left .15s ease; }
+.content-wrapper{ display:block; }
 @media (min-width: 768px){
-  .content-wrapper{ margin-left: 240px; }
+  .content-wrapper{ margin-left: 240px; height:100vh; overflow-y:auto; }
 }
 .sidebar .nav-link{ color:var(--muted); padding:0.6rem 0.75rem; border-radius:10px; margin-bottom:6px; display:flex; align-items:center; }
 .sidebar .nav-link:hover, .sidebar .nav-link.active{ background: linear-gradient(90deg, rgba(45,108,223,0.06), rgba(0,191,166,0.02)); color:var(--primary); text-decoration:none; }
@@ -115,5 +117,22 @@ a:focus, button:focus, input:focus { outline: 3px solid rgba(45,108,223,0.12); o
 
 /* Make small-screen navbar links visually consistent */
 .navbar .nav-link{ color:var(--muted); }
+
+/* Charts responsiveness in card */
+.card canvas{ max-width:100%; }
+
+/* Prevent horizontal scroll and keep page layout fixed */
+html, body { overflow-x: hidden; }
+
+/* Limit chart heights so the page usually fits without vertical scrolling */
+#balanceChart{ height: 260px !important; }
+#spendingChart{ height: 260px !important; }
+
+@media (max-width: 767.98px){
+  /* on small screens remove fixed height so charts fit vertically */
+  #balanceChart, #spendingChart{ height: 220px !important; }
+  .sidebar{ position: relative; width:100%; min-width:0; border-right: none; }
+  .content-wrapper{ margin-left: 0; height: auto; overflow: visible; }
+}
 
 
