@@ -2,40 +2,34 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">BLAGAJNA</h1>
-    <p style="color:red">MAKE SAVING MONEY FUN</p>
-</div>
+<section class="hero text-center">
+    <h1 class="display-4">Blagajna</h1>
+    <p class="hero-sub">MAKE SAVING MONEY FUN</p>
+</section>
 
-<div class="main-container">
+<div class="main-container" aria-label="Quick stats">
     <div class="main-box">
-        <p class="cont-text">SAVED THIS MONTH</p>
-        <br>
+        <p class="cont-text">Saved this month</p>
         <p class="cont-ammount">@ViewData["savedThisMonth"] €</p>
     </div>
     <div class="main-box">
-        <p class="cont-text">SPENT THIS MONTH</p>
-        <br>
+        <p class="cont-text">Spent this month</p>
         <p class="cont-ammount">@ViewData["spentThisMonth"] €</p>
     </div>
     <div class="main-box">
-        <p class="cont-text">BALANCE</p>
-        <br>
+        <p class="cont-text">Balance</p>
         <p class="cont-ammount">@ViewData["totalBalance"] €</p>
     </div>
     <div class="main-box">
-        <p class="cont-text">ALL SAVINGS</p>
-        <br>
+        <p class="cont-text">All savings</p>
         <p class="cont-ammount">@ViewData["totalSaved"] €</p>
     </div>  
     <div class="main-box">
-        <p class="cont-text">BUDGET FOR THIS MONTH</p>
-        <br>
+        <p class="cont-text">Budget for this month</p>
         <p class="cont-ammount">@ViewData["thisMonthBudget"] €</p>
     </div>
     <div class="main-box">
-        <p class="cont-text">MONTHLY BALANCE</p>
-        <br>
+        <p class="cont-text">Monthly balance</p>
         <p class="cont-ammount">@ViewData["LeftInBudget"] €</p>
     </div>
 </div>

@@ -1,0 +1,70 @@
+@{
+    ViewData["Title"] = "Charts";
+}
+
+<div class="card p-3 mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h4 m-0">Reports — Charts</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 mb-4">
+            <div class="card p-3 h-100">
+                <h5 class="mb-3">Monthly balance</h5>
+                <canvas id="balanceChart" aria-label="Monthly balance chart" role="img"></canvas>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card p-3 h-100">
+                <h5 class="mb-3">Spending by category</h5>
+                <canvas id="spendingChart" aria-label="Spending by category" role="img"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    async function initCharts(){
+        const res = await fetch('/Reports/GetChartData');
+        const json = await res.json();
+
+        const ctx = document.getElementById('balanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: json.months,
+                datasets: [{
+                    label: 'Balance (€)',
+                    data: json.balances,
+                    borderColor: '#2D6CDF',
+                    backgroundColor: 'rgba(45,108,223,0.08)',
+                    tension: 0.3,
+                    fill: true,
+                }]
+            },
+            options: { responsive:true, maintainAspectRatio: false }
+        });
+
+        const ctx2 = document.getElementById('spendingChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: json.categories,
+                datasets: [{ data: json.spending, backgroundColor: ['#2D6CDF','#00BFA6','#FFB300','#F97316','#9CA3AF'] }]
+            },
+            options: { responsive:true, maintainAspectRatio: false }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+        initCharts().catch(err=>console.error(err));
+    });
+</script>
+
+<style>
+    /* ensure charts have reasonable height */
+    #balanceChart{ width:100%; height:320px; }
+    #spendingChart{ width:100%; height:320px; }
+</style>

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/gasper/Documents/FRI/IS/Blagajna/web/web.csproj": {}
+    "/Users/davidreseta/Desktop/Blagajna/web/web.csproj": {}
   },
   "projects": {
-    "/Users/gasper/Documents/FRI/IS/Blagajna/web/web.csproj": {
+    "/Users/davidreseta/Desktop/Blagajna/web/web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/gasper/Documents/FRI/IS/Blagajna/web/web.csproj",
+        "projectUniqueName": "/Users/davidreseta/Desktop/Blagajna/web/web.csproj",
         "projectName": "web",
-        "projectPath": "/Users/gasper/Documents/FRI/IS/Blagajna/web/web.csproj",
-        "packagesPath": "/Users/gasper/.nuget/packages/",
-        "outputPath": "/Users/gasper/Documents/FRI/IS/Blagajna/web/obj/",
+        "projectPath": "/Users/davidreseta/Desktop/Blagajna/web/web.csproj",
+        "packagesPath": "/Users/davidreseta/.nuget/packages/",
+        "outputPath": "/Users/davidreseta/Desktop/Blagajna/web/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/gasper/.nuget/NuGet/NuGet.Config"
+          "/Users/davidreseta/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -37,8 +37,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "10.0.100"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -100,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
