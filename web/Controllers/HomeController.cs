@@ -57,6 +57,15 @@ public class HomeController : Controller
 
                 decimal savedThisMonth = userSavedMoney.Sum(s => s.Amount);
 
+                // Investments this month
+                var userInvestments = _context.Investments
+                                    .Where(i => i.User.Id == currentUser.Id &&
+                                                i.Date.Month == currentMonth &&
+                                                i.Date.Year == currentYear)
+                                    .ToList();
+
+                decimal investedThisMonth = userInvestments.Sum(i => i.Amount);
+
                 var userBudget = _context.Budgets
                                 .Where(s => s.User.Id == currentUser.Id &&
                                             s.StartDate.Month == currentMonth &&
@@ -84,11 +93,18 @@ public class HomeController : Controller
 
                 // Shranimo izračune v ViewData za prikaz v View
                 ViewData["savedThisMonth"] = savedThisMonth;
+                ViewData["investedThisMonth"] = investedThisMonth;
                 ViewData["totalbalance"] = totalBalance;
                 ViewData["spentThisMonth"] = spentThisMonth;
                 ViewData["thisMonthBudget"] = thisMonthBudget;
                 ViewData["LeftInBudget"] = budgetBalance;
                 ViewData["totalSaved"] = totalSaved;
+
+                // Investment settings preview
+                ViewData["investmentPercent"] = currentUser.InvestmentPercent;
+                ViewData["autoAllocateInvestment"] = currentUser.AutoAllocateInvestments;
+                var thisMonthInvest = Math.Round(thisMonthIncome * currentUser.InvestmentPercent / 100m, 2);
+                ViewData["thisMonthInvest"] = thisMonthInvest;
             }
             else
             {
@@ -101,6 +117,25 @@ public class HomeController : Controller
 
             }
         return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> UpdateInvestmentSettings(decimal investmentPercent, bool autoAllocateInvestment)
+    {
+        var currentUser = await _userManager.GetUserAsync(User);
+        if (currentUser == null) return RedirectToAction("Index");
+
+        // Clamp to valid range
+        if (investmentPercent < 0m) investmentPercent = 0m;
+        if (investmentPercent > 100m) investmentPercent = 100m;
+
+        currentUser.InvestmentPercent = investmentPercent;
+        currentUser.AutoAllocateInvestments = autoAllocateInvestment;
+
+        var result = await _userManager.UpdateAsync(currentUser);
+        // For now ignore failure details and redirect back
+        return RedirectToAction(nameof(Index));
     }
 
     public IActionResult Privacy()

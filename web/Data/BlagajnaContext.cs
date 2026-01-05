@@ -16,6 +16,7 @@ namespace web.Data
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Income> Incomes { get; set; }
         public DbSet<Saved> SavedMoney { get; set;}
+        public DbSet<Investment> Investments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,7 @@ namespace web.Data
             modelBuilder.Entity<Transaction>().ToTable("Transaction");
             modelBuilder.Entity<Income>().ToTable("Income");
             modelBuilder.Entity<Saved>().ToTable("Saved");
+            modelBuilder.Entity<Investment>().ToTable("Investment");
 
             foreach (var property in modelBuilder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetProperties())
