@@ -57,8 +57,15 @@ namespace web.Controllers
                 .Where(s => s.Date >= start && s.Date <= end)
                 .ToListAsync();
 
+            // investments (added chart)
+            var investQuery = await _db.Investments
+                .AsNoTracking()
+                .Where(i => i.Date >= start && i.Date <= end)
+                .ToListAsync();
+
             // compute balances per month = incomes - transactions - saved
             var balances = new List<double>();
+            var invested = new List<double>();
             for (int i = 0; i < 12; i++)
             {
                 var month = start.AddMonths(i);
@@ -68,10 +75,14 @@ namespace web.Controllers
                 var incomeSum = incomesQuery.Where(x => x.Date >= monthStart && x.Date <= monthEnd).Sum(x => x.Amount);
                 var transSum = transQuery.Where(x => x.Date >= monthStart && x.Date <= monthEnd).Sum(x => x.Amount);
                 var savedSum = savedQuery.Where(x => x.Date >= monthStart && x.Date <= monthEnd).Sum(x => x.Amount);
+                var investSum = investQuery.Where(x => x.Date >= monthStart && x.Date <= monthEnd).Sum(x => x.Amount);
 
                 // net change
                 var net = (double)(incomeSum - transSum - savedSum);
                 balances.Add(Math.Round(net, 2));
+
+                // track invested per month
+                invested.Add(Math.Round((double)investSum, 2));
             }
 
             // spending by category (last 12 months)
@@ -84,10 +95,17 @@ namespace web.Controllers
             var categories = byCategory.Select(x => x.Category).ToArray();
             var spending = byCategory.Select(x => Math.Round(x.Amount, 2)).ToArray();
 
+            // compute a sensible max for investments chart (20% headroom)
+            var maxInvest = invested.Any() ? invested.Max() : 0.0;
+            var investMax = Math.Ceiling(maxInvest * 1.2);
+            if (investMax <= 0) investMax = 10;
+
             var data = new
             {
                 months,
                 balances,
+                invested,
+                investMax,
                 categories,
                 spending
             };

@@ -23,6 +23,10 @@
     <div class="main-box">
         <p class="cont-text">All savings</p>
         <p class="cont-ammount">@ViewData["totalSaved"] €</p>
+    </div>
+    <div class="main-box">
+        <p class="cont-text">Invested this month</p>
+        <p class="cont-ammount">@ViewData["investedThisMonth"] €</p>
     </div>  
     <div class="main-box">
         <p class="cont-text">Budget for this month</p>
@@ -33,3 +37,154 @@
         <p class="cont-ammount">@ViewData["LeftInBudget"] €</p>
     </div>
 </div>
+
+<!-- Compact investment control: one button opens a small modal with both settings and one-time invest -->
+<div class="d-flex justify-content-start mb-3">
+    <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#investModeModal">Način investiranja</button>
+</div>
+
+<!-- Small centered modal with settings + one-time invest (keeps page from scrolling) -->
+<div class="modal fade" id="investModeModal" tabindex="-1" aria-labelledby="investModeLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="investModeLabel">Način investiranja</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zapri"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Settings -->
+        <h6>Nastavitve</h6>
+        <form id="settingsForm">
+            @Html.AntiForgeryToken()
+            <div class="mb-2">
+                <label class="form-label small">Odstotek za investiranje (%)</label>
+                <input name="investmentPercent" id="modalInvestmentPercent" type="number" min="0" max="100" step="0.01" class="form-control form-control-sm" value="@(ViewData["investmentPercent"] ?? 0)" />
+            </div>
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" id="modalAutoAllocate" name="autoAllocateInvestment" @( (ViewData["autoAllocateInvestment"] as bool? == true) ? "checked" : "") />
+                <label class="form-check-label small" for="modalAutoAllocate">Samodejno alociraj pri prihodkih</label>
+            </div>
+            <div id="settingsAlert" class="alert alert-danger d-none py-1" role="alert"></div>
+            <div class="d-grid">
+                <button type="button" id="saveSettings" class="btn btn-sm btn-primary">Shrani nastavitve</button>
+            </div>
+        </form>
+
+        <hr />
+
+        <!-- One-time invest -->
+        <h6>Enkratno investiranje</h6>
+        <form id="oneTimeForm">
+            @Html.AntiForgeryToken()
+            <div class="mb-2">
+                <label class="form-label small">Znesek</label>
+                <input name="Amount" id="modalInvestAmount" type="number" step="0.01" min="0" class="form-control form-control-sm" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label small">Opis (neobvezno)</label>
+                <input name="Description" id="modalInvestDescription" class="form-control form-control-sm" />
+            </div>
+            <div id="oneTimeAlert" class="alert alert-danger d-none py-1" role="alert"></div>
+            <div class="d-grid">
+                <button type="button" id="saveOneTime" class="btn btn-sm btn-success">Investiraj zdaj</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+<script>
+// Save settings via AJAX
+document.getElementById('saveSettings').addEventListener('click', async function () {
+    var percent = document.getElementById('modalInvestmentPercent').value;
+    var auto = document.getElementById('modalAutoAllocate').checked;
+    var alertEl = document.getElementById('settingsAlert');
+
+    alertEl.classList.add('d-none');
+
+    // validation
+    var p = parseFloat(percent);
+    if (isNaN(p) || p < 0 || p > 100) {
+        alertEl.textContent = 'Vnesite veljaven odstotek (0–100).';
+        alertEl.classList.remove('d-none');
+        return;
+    }
+
+    // Build form data with anti-forgery token
+    var settingsForm = document.getElementById('settingsForm');
+    var tokenInput = settingsForm.querySelector('input[name="__RequestVerificationToken"]');
+    var fd = new FormData();
+    fd.append('investmentPercent', p);
+    fd.append('autoAllocateInvestment', auto);
+    if (tokenInput) fd.append('__RequestVerificationToken', tokenInput.value);
+
+    try {
+        var res = await fetch('/Home/UpdateInvestmentSettings', { method: 'POST', body: fd });
+        if (res.ok) {
+            // show success briefly
+            alertEl.classList.remove('d-none');
+            alertEl.classList.remove('alert-danger');
+            alertEl.classList.add('alert-success');
+            alertEl.textContent = 'Nastavitve shranjene.';
+            setTimeout(() => {
+                var modal = bootstrap.Modal.getInstance(document.getElementById('investModeModal'));
+                if (modal) modal.hide();
+                window.location.reload();
+            }, 700);
+        } else {
+            alertEl.textContent = 'Napaka pri shranjevanju.';
+            alertEl.classList.remove('d-none');
+        }
+    } catch (e) {
+        alertEl.textContent = 'Omrežna napaka.';
+        alertEl.classList.remove('d-none');
+        console.error(e);
+    }
+});
+
+// One-time investment via AJAX
+document.getElementById('saveOneTime').addEventListener('click', async function () {
+    var amount = document.getElementById('modalInvestAmount').value;
+    var desc = document.getElementById('modalInvestDescription').value;
+    var alertEl = document.getElementById('oneTimeAlert');
+    alertEl.classList.add('d-none');
+
+    if (!amount || parseFloat(amount) <= 0) {
+        alertEl.textContent = 'Vnesite veljaven pozitiven znesek.';
+        alertEl.classList.remove('d-none');
+        return;
+    }
+
+    var oneTimeForm = document.getElementById('oneTimeForm');
+    var tokenInput = oneTimeForm.querySelector('input[name="__RequestVerificationToken"]');
+    var fd = new FormData();
+    fd.append('Amount', amount);
+    fd.append('Description', desc);
+    if (tokenInput) fd.append('__RequestVerificationToken', tokenInput.value);
+
+    try {
+        var res = await fetch('/Investments/Create', { method: 'POST', body: fd });
+        if (res.ok) {
+            alertEl.classList.remove('d-none');
+            alertEl.classList.remove('alert-danger');
+            alertEl.classList.add('alert-success');
+            alertEl.textContent = 'Investicija dodana.';
+            setTimeout(() => {
+                var modal = bootstrap.Modal.getInstance(document.getElementById('investModeModal'));
+                if (modal) modal.hide();
+                window.location.reload();
+            }, 600);
+        } else {
+            alertEl.textContent = 'Napaka pri dodajanju investicije.';
+            alertEl.classList.remove('d-none');
+        }
+    } catch (e) {
+        alertEl.textContent = 'Omrežna napaka.';
+        alertEl.classList.remove('d-none');
+        console.error(e);
+    }
+});
+</script>
+}

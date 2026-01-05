@@ -83,6 +83,26 @@ namespace web.Controllers
                     // Shrani Income
                 _context.Add(income);
                 await _context.SaveChangesAsync();
+
+                // Če ima uporabnik samodejno alokacijo in odstotek > 0, ustvarimo Investment
+                if (currentUser.AutoAllocateInvestments && currentUser.InvestmentPercent > 0m)
+                {
+                    var investAmount = Math.Round(income.Amount * currentUser.InvestmentPercent / 100m, 2);
+                    if (investAmount > 0m)
+                    {
+                        var investment = new Investment
+                        {
+                            Amount = investAmount,
+                            Date = DateTime.Now,
+                            User = currentUser,
+                            Income = income,
+                            Description = $"Auto allocation from Income #{income.Id} ({currentUser.InvestmentPercent}%)"
+                        };
+                        _context.Add(investment);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             return View(income);
