@@ -9,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // nastavi spremenljivko connectionString za .useSqlServer(connectionString)
 var connectionString = builder.Configuration.GetConnectionString("AzureContext");
-
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new Exception("AzureContext connection string is missing");
+}
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
