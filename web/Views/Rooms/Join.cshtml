@@ -1,0 +1,26 @@
+@model web.Controllers.RoomsController.JoinRoomDto
+@{
+    ViewData["Title"] = "Room Join";
+}
+
+<div class="container py-4">
+    <h1 class="h4 mb-3">Join Room</h1>
+
+    <form asp-action="Join" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label class="form-label">Room Number/name</label>
+            <input asp-for="Code" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Join / Create</button>
+    </form>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="text-danger mt-2">
+            @Html.ValidationSummary()
+        </div>
+    }
+</div>

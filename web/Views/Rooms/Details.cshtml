@@ -1,0 +1,104 @@
+@model web.Models.Room
+@{
+    ViewData["Title"] = "Room Details";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h4 mb-0">Room: @Model.Code</h1>
+
+        <div>
+                @if (!Model.IsSettled)
+                {
+                    <a asp-action="AddExpense"
+                    asp-route-roomId="@Model.Id"
+                    class="btn btn-success btn-sm">
+                        Add Expense
+                    </a>
+                    <a asp-action="Settle"
+                    asp-route-id="@Model.Id"
+                    class="btn btn-outline-primary btn-sm">
+                        Settle
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="Settle"
+                    asp-route-id="@Model.Id"
+                    class="btn btn-primary btn-sm">
+                        View settlement
+                    </a>
+                    <span class="badge bg-secondary ms-2">Finalized</span>
+                }
+        </div>
+    </div>
+
+    <div class="card shadow-sm p-3 mb-4">
+        <h2 class="h5 mb-2">Members</h2>
+        <ul class="mb-0">
+        @foreach (var m in Model.Members)
+        {
+            var name = (m.User != null && (!string.IsNullOrWhiteSpace(m.User.FirstName) || !string.IsNullOrWhiteSpace(m.User.LastName)))
+                ? $"{m.User.FirstName} {m.User.LastName}".Trim()
+                : (m.User?.UserName ?? m.UserId);
+
+            <li>@name</li>
+        }
+        </ul>
+    </div>
+
+    <div class="card shadow-sm p-3 mb-4">
+        <h2 class="h5 mb-3">Expenses</h2>
+
+        @if (Model.Expenses == null || !Model.Expenses.Any())
+        {
+            <p class="text-muted mb-0">No expenses yet. Add one above.</p>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Payer</th>
+                            <th>Amount</th>
+                            <th>Participants</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var expense in Model.Expenses.OrderByDescending(e => e.CreatedAt))
+                    {
+                        var payerName = expense.PayerUser != null
+                            ? (!string.IsNullOrWhiteSpace(expense.PayerUser.FirstName) || !string.IsNullOrWhiteSpace(expense.PayerUser.LastName)
+                                ? $"{expense.PayerUser.FirstName} {expense.PayerUser.LastName}".Trim()
+                                : expense.PayerUser.UserName)
+                            : expense.PayerUserId;
+
+                        var participantCount = expense.Participants?.Count ?? 0;
+
+                        <tr>
+                            <td>@expense.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td>@(expense.Description ?? "-")</td>
+                            <td>@payerName</td>
+                            <td>@expense.Amount.ToString("F2")</td>
+                            <td>@participantCount participant@(participantCount != 1 ? "s" : "")</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-3">
+                <strong>Total Spending:</strong> @Model.Expenses.Sum(e => e.Amount).ToString("F2")
+            </div>
+        }
+    </div>
+    @if (Model.IsSettled)
+    {
+        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger btn-sm">
+            Delete room
+        </a>
+    }
+</div>

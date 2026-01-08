@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Blagajna</title>
+    <title>@ViewData["Title"] - Budget</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/web.styles.css" asp-append-version="true" />
@@ -15,7 +15,7 @@
         <!-- top navbar for small screens -->
         <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom box-shadow mb-3 d-md-none">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blagajna</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Budget</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav"
                     aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,6 +24,7 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Transaction" asp-action="Index">Transactions</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Rooms" asp-action="Join">Rooms</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Category" asp-action="Index">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Budget" asp-action="Index">Budgets</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Incomes" asp-action="Index">Incomes</a></li>
@@ -39,10 +40,11 @@
         <!-- sidebar for md+ screens -->
         <aside class="sidebar d-none d-md-flex flex-column">
             <div class="sidebar-brand mb-3">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blagajna</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Budget</a>
             </div>
             <nav class="nav nav-pills flex-column" aria-label="Main navigation">
                 <a class="nav-link" asp-controller="Home" asp-action="Index"><span class="nav-icon">🏠</span> Home</a>
+                <a class="nav-link" asp-controller="Rooms" asp-action="Join"><span class="nav-icon">👥</span> Rooms</a>
                 <a class="nav-link" asp-controller="Transaction" asp-action="Index"><span class="nav-icon">📄</span> Transactions</a>
                 <a class="nav-link" asp-controller="Category" asp-action="Index"><span class="nav-icon">🏷️</span> Categories</a>
                 <a class="nav-link" asp-controller="Budget" asp-action="Index"><span class="nav-icon">💼</span> Budgets</a>
@@ -53,6 +55,10 @@
                 <hr />
                 <a class="nav-link mt-auto btn btn-sm btn-outline-secondary" asp-controller="AdminTables" asp-action="Index">Admin dashboard</a>
             </nav>
+
+            <div class="mt-auto px-2 pb-2">
+                <partial name="_LoginPartial" />
+            </div>
         </aside>
     </header>
 
