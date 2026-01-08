@@ -39,7 +39,7 @@ try
         DbInitializer.Initialize(context);
     }    
 }
-catch (System.Exception)
+catch (Exception ex)
 {
     Console.WriteLine("DB INIT FAILED: " + ex);
     
