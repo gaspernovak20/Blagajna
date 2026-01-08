@@ -31,11 +31,19 @@ var app = builder.Build();
 
 
 // Seed database using DbInitializer 
-// using (var scope = app.Services.CreateScope())
-// {
-//     var context = scope.ServiceProvider.GetRequiredService<BlagajnaContext>();
-//     DbInitializer.Initialize(context);
-// }
+try
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetRequiredService<BlagajnaContext>();
+        DbInitializer.Initialize(context);
+    }    
+}
+catch (System.Exception)
+{
+    Console.WriteLine("DB INIT FAILED: " + ex);
+    
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
