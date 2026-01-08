@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Builder;
 var builder = WebApplication.CreateBuilder(args);
 
 // nastavi spremenljivko connectionString za .useSqlServer(connectionString)
-var connectionString = builder.Configuration.GetConnectionString("AzureContext");
+var connectionString = builder.Configuration.GetConnectionString("BlagajnaContext");
 if (string.IsNullOrEmpty(connectionString))
 {
     throw new Exception("AzureContext connection string is missing");

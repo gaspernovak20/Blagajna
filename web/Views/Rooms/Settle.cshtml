@@ -1,0 +1,84 @@
+@model web.Models.ViewModels.RoomSettlementViewModel
+@{
+    ViewData["Title"] = "Settlement";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h4 mb-0">Settlement: @Model.RoomCode</h1>
+        <a asp-action="Details" asp-route-id="@Model.RoomId" class="btn btn-secondary btn-sm">Back to room</a>
+    </div>
+
+    <div class="card shadow-sm p-3 mb-4">
+        @if (Model.IsSettled)
+        {
+            <div class="alert alert-success mb-0" role="alert">
+                <strong>✓ Room finalized</strong>
+                @if (Model.SettledAt != null)
+                {
+                    <div class="mt-1">Settled at: @Model.SettledAt.Value.ToString("dd.MM.yyyy HH:mm")</div>
+                }
+                <div class="mt-1">No more expenses can be added.</div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning mb-2" role="alert">
+                <strong>⚠ Not finalized yet.</strong>
+                Members can still add expenses. Click below to lock the room.
+            </div>
+
+            <form asp-action="FinalizeSettlement" asp-route-id="@Model.RoomId" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-primary">Finalize settlement</button>
+            </form>
+        }
+    </div>
+
+    <div class="card shadow-sm p-3 mb-4">
+        <div><strong>Total spending:</strong> @Model.TotalSpending.ToString("F2")</div>
+    </div>
+
+    <div class="card shadow-sm p-3 mb-4">
+        <h2 class="h5 mb-3">Balances</h2>
+        <div class="table-responsive">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th>Member</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var b in Model.Balances)
+                {
+                    <tr>
+                        <td>@b.DisplayName</td>
+                        <td class="@(b.Balance >= 0 ? "text-success" : "text-danger")">
+                            @b.Balance.ToString("F2")
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card shadow-sm p-3">
+        <h2 class="h5 mb-3">Who pays whom</h2>
+
+        @if (Model.Transfers.Count == 0)
+        {
+            <p class="text-muted mb-0">Nothing to settle.</p>
+        }
+        else
+        {
+            <ul class="mb-0">
+            @foreach (var t in Model.Transfers)
+            {
+                <li><strong>@t.FromName</strong> pays @t.ToName: @t.Amount.ToString("F2")</li>
+            }
+            </ul>
+        }
+    </div>
+</div>

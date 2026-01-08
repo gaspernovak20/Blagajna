@@ -1,0 +1,23 @@
+@model web.Models.Room
+@{
+    ViewData["Title"] = "Delete Room";
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm p-3">
+        <h1 class="h4 mb-3 text-danger">Delete room</h1>
+
+        <div class="alert alert-warning" role="alert">
+            <strong>⚠ Warning:</strong> You are about to delete room <strong>@Model.Code</strong>.
+            This will permanently delete all expenses and settlement data in this room.
+        </div>
+
+        <p>This action cannot be undone.</p>
+
+        <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger">Delete room</button>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
