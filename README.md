@@ -8,8 +8,6 @@ Nudil bo uporabnikom personalizirane vpoglede v porabo ter omogočal preprosto d
 
 Sistem za upravljanje z osebnimi financami in proračunom s podporo za skupine bi torej predstavljal koristen in uporaben pripomoček za osebno in skupinsko finančno upravljanje, z jasnim poudarkom na preglednosti, preprostem deljenju stroškov in varnosti podatkov.
 
-Predvidene entitete: AspNetRoleClaims, AspNetRoles, AspNetUserClaims, AspNetUserLogins, AspNetRoles. AspNetUsers, AspNetUserTokens, Budget, Category, Income, Saved, Transaction.
-
 #### Člani ekipe:
 
 Gašper Novak, David Rešeta, Tilen Knez, Jurij Grohar
