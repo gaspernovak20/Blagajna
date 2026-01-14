@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,9 +16,10 @@
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Budget</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav"
-                    aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                        aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="mobileNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
@@ -30,8 +30,9 @@
                         <li class="nav-item"><a class="nav-link" asp-controller="Incomes" asp-action="Index">Incomes</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Saved" asp-action="Index">Savings</a></li>
                         <li class="nav-item"><a class="nav-link" asp-controller="Investments" asp-action="Index">Investments</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="Reports" asp-action="Charts">Reports</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Reports" asp-action="Charts">Reports</a></li>
                     </ul>
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -42,6 +43,7 @@
             <div class="sidebar-brand mb-3">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Budget</a>
             </div>
+
             <nav class="nav nav-pills flex-column" aria-label="Main navigation">
                 <a class="nav-link" asp-controller="Home" asp-action="Index"><span class="nav-icon">🏠</span> Home</a>
                 <a class="nav-link" asp-controller="Rooms" asp-action="Join"><span class="nav-icon">👥</span> Rooms</a>
@@ -53,9 +55,7 @@
                 <a class="nav-link" asp-controller="Investments" asp-action="Index"><span class="nav-icon">📈</span> Investments</a>
                 <a class="nav-link" asp-controller="Reports" asp-action="Charts"><span class="nav-icon">📊</span> Reports</a>
                 <hr />
-                <a class="nav-link mt-auto btn btn-sm btn-outline-secondary" asp-controller="AdminTables" asp-action="Index">Admin dashboard</a>
             </nav>
-
             <div class="mt-auto px-2 pb-2">
                 <partial name="_LoginPartial" />
             </div>
@@ -63,23 +63,23 @@
     </header>
 
     <div class="content-wrapper">
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div>&copy; 2024 - web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></div>
+                <div><a class="btn btn-sm btn-outline-secondary" asp-controller="AdminTables" asp-action="Index">Admin dashboard</a></div>
+            </div>
+        </footer>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div>&copy; 2024 - web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></div>
-            <div><a class="btn btn-sm btn-outline-secondary" asp-controller="AdminTables" asp-action="Index">Admin dashboard</a></div>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
-
 </html>
